@@ -133,23 +133,26 @@ function calculateRequirement() {
   }
 
   // Updated formula:
-  // If Power < 50,000,000:
-  //   DKP = 20% (0.2)
-  //   Dead Requirement = 2% (0.02)
-  // If Power >= 50,000,000:
-  //   DKP = 30% (0.3)
-  //   Dead Requirement = 3% (0.03)
+  // If Power < 40,000,000: DKP = 10%, Dead = 1%
+  // If Power > 40,000,000 and < 65,000,000: DKP = 15%, Dead = 1.5%
+  // If Power >= 65,000,000: DKP = 20%, Dead = 2%
 
   let dkpGoal, deadRequirement, category;
 
-  if (power >= 60000000) {
-    dkpGoal = power * 0.2;
-    deadRequirement = power * 0.02;
-    category = '20% DKP and 2% Dead Requirement category';
-  } else {
+  if (power < 40000000) {
     dkpGoal = power * 0.1;
     deadRequirement = power * 0.01;
     category = '10% DKP and 1% Dead Requirement category';
+  } else if (power < 65000000) {
+    // means power is >= 40,000,000 and < 65,000,000
+    dkpGoal = power * 0.15;
+    deadRequirement = power * 0.015;
+    category = '15% DKP and 1.5% Dead Requirement category';
+  } else {
+    // power >= 65,000,000
+    dkpGoal = power * 0.2;
+    deadRequirement = power * 0.02;
+    category = '20% DKP and 2% Dead Requirement category';
   }
 
   var dkpGoalFormatted = new Intl.NumberFormat('en-US').format(dkpGoal).replace(/,/g, '.');
