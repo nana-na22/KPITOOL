@@ -1,25 +1,52 @@
-function calculateRequirement() {
-  var powerStr = document.getElementById('powerInput').value;
-  var power = parseFloat(powerStr.replace(/\./g, ''));
-  if (!power) {
-    alert('Please enter a valid value for Power.');
-    return;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kingdom 3522</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 20px;
+    color: #333;
   }
-
-  let dkpGoal, deadRequirement, category;
-
-  if (power >= 50000000) {
-    dkpGoal = power * 0.3;
-    deadRequirement = power * 0.02;
-    category = '30% DKP and 2% Dead Requirement category';
-  } else {
-    dkpGoal = power * 0.2;
-    deadRequirement = power * 0.01;
-    category = '20% DKP and 1% Dead Requirement category';
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
-
-  var dkpGoalFormatted = new Intl.NumberFormat('en-US').format(dkpGoal).replace(/,/g, '.');
-  var deadRequirementFormatted = new Intl.NumberFormat('en-US').format(deadRequirement).replace(/,/g, '.');
-
-  document.getElementById('result').style.display = 'block';
-  document.getElementById('result').innerHTML = 'DKP Goal: ' + dkpGoalFormatted +
+  h2, h3 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+  }
+  input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+  button {
+    padding: 12px 24px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  button:hover {
+    background-color: #2980b9;
+  }
+  .result, .description, .point-info {
+    margin-top: 20px;
+    padding: 15px;
